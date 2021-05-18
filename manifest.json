@@ -2,5 +2,8 @@
   "name": "HLTV Google Calendar",
   "description": "A Chrome extension to add CSGO matches listed on HLTV.org to your Google Calendar",
   "version": "1.0",
-  "manifest_version": 3
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
 }
