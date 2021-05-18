@@ -7,7 +7,6 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs",
-    "<all_urls>"
+    "https://www.hltv.org/matches/*"
   ]
 }
