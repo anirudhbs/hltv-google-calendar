@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 160px;
+}
+
+h1 {
+  color: #fff;
+  background-color: #000;
+  padding: 2px;
+}
+
+a {
+  padding: 12px;
+  display: block;
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+}
+
+a:hover {
+  cursor: pointer;
+  transform: scale(0.95);
+  transition-duration: 1s;
+}
