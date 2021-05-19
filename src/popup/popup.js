@@ -1,7 +1,9 @@
-const button = document.getElementById('add-to-calendar')
+const link = document.getElementById('add-to-calendar')
 
-chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (request.action == "SCRAPE_DONE") {
+chrome.runtime.onMessage.addListener(function(request) {
+  if (request.action !== "SCRAPE_DONE") {
+    return;
+  }
 
     const { team1, team2, event, timestamp } = request.data
     const parsedTimestamp = parseInt(timestamp)
@@ -9,16 +11,13 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     const startTime = getDateForUrl(parsedTimestamp)
     const endTime = getDateForUrl(parsedTimestamp)
 
-    button.addEventListener('click', () => {
-      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=` +
-        `${team1}+vs+${team2}+at+${event}` +
-        `&dates=${startTime}%2F${endTime}`
-      window.open(url, '_blank').focus();
-    })
-  }
+    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=` +
+      `${team1}+vs+${team2}+(${event})` +
+      `&dates=${startTime}%2F${endTime}`
+    link.setAttribute('href', url)
 });
 
-window.onload = function onWindowLoad() {
+window.onload = function () {
   chrome.tabs.executeScript(null, {
     file: "scrapePage.js"
   }, function() {
