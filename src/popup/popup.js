@@ -3,14 +3,16 @@ const button = document.getElementById('add-to-calendar')
 chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.action == "SCRAPE_DONE") {
 
-    const { team1, team2, timestamp } = request.source
+    const { team1, team2, event, timestamp } = request.data
     const parsedTimestamp = parseInt(timestamp)
 
     const startTime = getDateForUrl(parsedTimestamp)
     const endTime = getDateForUrl(parsedTimestamp)
 
     button.addEventListener('click', () => {
-      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${team1}+vs+${team2}&dates=${startTime}%2F${endTime}`
+      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=` +
+        `${team1}+vs+${team2}+at+${event}` +
+        `&dates=${startTime}%2F${endTime}`
       window.open(url, '_blank').focus();
     })
   }
