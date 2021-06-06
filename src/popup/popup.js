@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function (request) {
   const parsedTimestamp = parseInt(timestamp)
 
   const startTime = getDateForUrl(parsedTimestamp)
-  const endTime = getDateForUrl(parsedTimestamp)
+  const endTime = getDateForUrl(parsedTimestamp + 3600000)
 
   const url =
     `https://www.google.com/calendar/render?action=TEMPLATE&text=` +
@@ -22,7 +22,7 @@ window.onload = function () {
   chrome.tabs.executeScript(
     null,
     {
-      file: 'scrapePage.js',
+      file: 'scrapePage.js'
     },
     function () {
       if (chrome.runtime.lastError) {
