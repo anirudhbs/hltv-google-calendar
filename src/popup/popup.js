@@ -5,15 +5,15 @@ chrome.runtime.onMessage.addListener(function (request) {
     return
   }
 
-  const { team1, team2, event, timestamp } = request.data
+  const { team1, team2, event, timestamp, numberOfMaps } = request.data
   const parsedTimestamp = parseInt(timestamp)
 
   const startTime = getDateForUrl(parsedTimestamp)
-  const endTime = getDateForUrl(parsedTimestamp + 3600000)
+  const endTime = getDateForUrl(parsedTimestamp + 3600000 * numberOfMaps)
 
   const url =
     `https://www.google.com/calendar/render?action=TEMPLATE&text=` +
-    `${team1}+vs+${team2}+(${event})` +
+    `${team1}+vs+${team2}+(BO${numberOfMaps} at ${event})` +
     `&dates=${startTime}%2F${endTime}`
   link.setAttribute('href', url)
 })
